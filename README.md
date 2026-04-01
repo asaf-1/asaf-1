@@ -1,6 +1,8 @@
 # 💫 About Me:
 QA Engineer with 5 years of experience in manual testing, bug tracking, and Playwright-based automation for complex SaaS and AI-based systems backed by a strong technical background. Built E2E automation infrastructures from scratch with AI-assisted coding, executed API and performance testing (Postman, K6), and collaborated closely with R&D teams to improve system stability, scalability, and release quality.
+
 **Playwright Automation | E2E | TypeScript | Python | API Testing | SaaS | Web Applications | Multi-tenant | CI/CD | Jenkins | Docker**
+Tel Aviv, Israel | +972-52-4200706 | asafnuriqa@gmail.com
 
 ## Highlights
 - Multi-tenant Playwright automation for SaaS platforms
