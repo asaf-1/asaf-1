@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Asaf Nuri — QA Automation Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0b0f14;
+    --bg2: #111820;
+    --bg3: #161e28;
+    --teal: #00e5b0;
+    --teal-dim: #00b88a;
+    --teal-muted: rgba(0,229,176,0.08);
+    --teal-border: rgba(0,229,176,0.18);
+    --text: #e8edf2;
+    --text-muted: #6b8091;
+    --text-dim: #a0b4c2;
+    --mono: 'Space Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --radius: 4px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,176,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,176,0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(11,15,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--teal-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 56px;
+  }
+  nav .logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--teal);
+    letter-spacing: 0.05em;
+  }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--teal); }
+
+  section { position: relative; z-index: 1; }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    max-width: 900px;
+  }
+  .hero-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--teal);
+  }
+  .hero h1 {
+    font-family: var(--mono);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .hero h1 span { color: var(--teal); }
+  .hero .tagline {
+    font-family: var(--sans);
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: #000;
+    font-weight: 700;
+  }
+  .btn-primary:hover { background: #00ffcb; transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--teal);
+    border: 1px solid var(--teal-border);
+  }
+  .btn-ghost:hover { background: var(--teal-muted); border-color: var(--teal); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--teal);
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .section-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 3rem;
+  }
+  .section-heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-heading .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+  }
+  .section-heading h2 {
+    font-family: var(--mono);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+  }
+
+  #skills { background: var(--bg2); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover {
+    border-color: var(--teal-border);
+    transform: translateY(-2px);
+  }
+  .skill-card-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 2px;
+    padding: 2px 8px;
+  }
+
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-period {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+  }
+  .exp-company {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .exp-loc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .exp-role {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+  .exp-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+  .exp-desc li {
+    margin-left: 1.25rem;
+    margin-bottom: 0.35rem;
+    color: var(--text-dim);
+  }
+  .exp-desc li::marker { color: var(--teal); }
+  .exp-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    background: var(--teal-muted);
+    border: 1px solid var(--teal-border);
+    border-radius: 2px;
+    padding: 2px 8px;
+  }
+
+  #projects { background: var(--bg2); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .project-card {
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--teal-dim), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .project-card:hover { border-color: var(--teal-border); transform: translateY(-2px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
+  }
+  .project-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .tech-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    padding: 2px 7px;
+  }
+
+  #side-projects { background: var(--bg); }
+  .section-copy {
+    max-width: 680px;
+    margin: -1rem 0 2rem;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .repo-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    min-height: 100%;
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .repo-card:hover {
+    border-color: var(--teal-border);
+    transform: translateY(-2px);
+  }
+  .repo-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .repo-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--teal);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.55rem;
+    text-transform: uppercase;
+  }
+  .repo-name {
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: var(--text);
+    line-height: 1.35;
+  }
+  .repo-link {
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .repo-link:hover {
+    color: var(--teal);
+    border-color: var(--teal-border);
+    background: var(--teal-muted);
+  }
+  .repo-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    flex: 1;
+  }
+  .repo-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .contact-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .contact-text h3 {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .contact-text p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--radius);
+    transition: all 0.2s;
+  }
+  .contact-link:hover {
+    border-color: var(--teal-border);
+    color: var(--teal);
+    background: var(--teal-muted);
+  }
+  .contact-link .link-icon {
+    width: 28px;
+    height: 28px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+    padding: 2rem 3rem;
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  footer span { color: var(--teal); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+  .hero .hero-label   { animation-delay: 0.1s; }
+  .hero h1            { animation-delay: 0.25s; }
+  .hero .tagline      { animation-delay: 0.35s; }
+  .hero .hero-ctas    { animation-delay: 0.45s; }
+  .hero .hero-stats   { animation-delay: 0.55s; }
+
+  @media (max-width: 700px) {
+    nav { padding: 0 1.25rem; }
+    nav ul { gap: 1rem; }
+    .hero { padding: 6rem 1.25rem 3rem; }
+    .section-inner { padding: 3.5rem 1.25rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
+    .contact-block { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">asaf_nuri.qa</div>
+  <ul>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#side-projects">GitHub</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero">
+    <div class="hero-label">Available for hire · Tel Aviv, Israel</div>
+    <h1>Asaf<br/><span>Nuri</span></h1>
+    <p class="tagline">Senior QA Automation Engineer specializing in Playwright (TypeScript), API validation, performance testing, and building end-to-end automation infrastructure from scratch.</p>
+    <div class="hero-ctas">
+      <a href="mailto:asafnuriqa@gmail.com" class="btn btn-primary">Get in touch</a>
+      <a href="https://www.linkedin.com/in/asaf-nuri" target="_blank" class="btn btn-ghost">LinkedIn →</a>
+      <a href="https://github.com/asaf-1" target="_blank" class="btn btn-ghost">GitHub →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div>
+        <span class="stat-num">200+</span>
+        <span class="stat-label">Automated Tests Built</span>
+      </div>
+      <div>
+        <span class="stat-num">90%</span>
+        <span class="stat-label">Manual Testing Reduced</span>
+      </div>
+      <div>
+        <span class="stat-num">3</span>
+        <span class="stat-label">Domains: UI · API · Perf</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="num">01.</span>
+      <h2>Technical Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Automation & Testing</div>
+        <div class="skill-tags">
+          <span class="tag">Playwright (TS)</span>
+          <span class="tag">E2E Automation</span>
+          <span class="tag">Manual QA</span>
+          <span class="tag">Regression</span>
+          <span class="tag">Sanity</span>
+          <span class="tag">Exploratory</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">API & Performance</div>
+        <div class="skill-tags">
+          <span class="tag">Postman</span>
+          <span class="tag">REST API</span>
+          <span class="tag">Swagger/OpenAPI</span>
+          <span class="tag">k6</span>
+          <span class="tag">JMeter</span>
+          <span class="tag">JWT / Auth</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Languages & Tools</div>
+        <div class="skill-tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">Python (basic)</span>
+          <span class="tag">Git / GitHub</span>
+          <span class="tag">Azure CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Data & Cloud</div>
+        <div class="skill-tags">
+          <span class="tag">MSSQL</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">AWS S3</span>
+          <span class="tag">Azure Boards</span>
+          <span class="tag">Multi-Tenant</span>
+          <span class="tag">Microservices</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">AI & Data Workflows</div>
+        <div class="skill-tags">
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">AI Test Generation</span>
+          <span class="tag">Excel Pipelines</span>
+          <span class="tag">AI Output Validation</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Documentation</div>
+        <div class="skill-tags">
+          <span class="tag">STP</span>
+          <span class="tag">STD</span>
+          <span class="tag">STR</span>
+          <span class="tag">Bug Reports</span>
+          <span class="tag">Jira</span>
+          <span class="tag">Agile / Scrum</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="num">02.</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Feb 2025 – Present</div>
+          <div class="exp-company">BUSOFT</div>
+          <div class="exp-loc">Tel Aviv, Israel</div>
+        </div>
+        <div>
+          <div class="exp-role">QA Automation Engineer (Manual & Automation)</div>
+          <ul class="exp-desc">
+            <li>Built a full E2E Playwright (TypeScript) automation infrastructure from scratch — 190+ test cases for a complex multi-tenant CRM SaaS on Azure.</li>
+            <li>Created comprehensive regression suite reducing manual testing time by ~90%.</li>
+            <li>Mentored QA engineers and led knowledge-sharing sessions on automation best practices.</li>
+            <li>Performed advanced API testing including SSO flows, token validation, and client–server integration via Postman.</li>
+            <li>Executed load and stress tests using k6 to improve system scalability.</li>
+            <li>Integrated financial systems into an ABP Web Platform; connected to AWS S3 and databases.</li>
+          </ul>
+          <div class="exp-badges">
+            <span class="badge">Playwright</span>
+            <span class="badge">TypeScript</span>
+            <span class="badge">k6</span>
+            <span class="badge">Postman</span>
+            <span class="badge">Azure</span>
+            <span class="badge">AWS S3</span>
+            <span class="badge">MSSQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Nov 2021 – Nov 2024</div>
+          <div class="exp-company">ROKKA.AI</div>
+          <div class="exp-loc">Tel Aviv, Israel</div>
+        </div>
+        <div>
+          <div class="exp-role">Quality Assurance / QC Engineer</div>
+          <ul class="exp-desc">
+            <li>Planned and executed full testing cycles: sanity, regression, functional, non-functional, and monkey testing for an AI-based campaign management system.</li>
+            <li>Developed and integrated automated tests alongside manual flows — improved testing efficiency by 80%.</li>
+            <li>Authored professional test documentation: STP, STD, STR.</li>
+            <li>Conducted REST API testing using Postman; tracked all bugs and defects in Azure/Jira.</li>
+            <li>Contributed to release stability, production quality, and testing coverage improvements.</li>
+          </ul>
+          <div class="exp-badges">
+            <span class="badge">Postman</span>
+            <span class="badge">Azure Boards</span>
+            <span class="badge">Jira</span>
+            <span class="badge">Test Documentation</span>
+            <span class="badge">AI Systems</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">2017 – 2020</div>
+          <div class="exp-company">Israeli Ministry of Education</div>
+          <div class="exp-loc">Israel</div>
+        </div>
+        <div>
+          <div class="exp-role">English Language Teacher (High School)</div>
+          <ul class="exp-desc">
+            <li>Educated and assessed students in communication and language — skills that directly inform clear bug reporting, documentation, and cross-team collaboration in QA.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="num">03.</span>
+      <h2>Key Projects</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">Project 01</div>
+        <div class="project-name">QA Documentation Pack — STP / STD / STR</div>
+        <div class="project-desc">Full release-level QA documentation for complex multi-tenant SaaS flows covering user management, role/permission validation, license/session behavior, and data sync scenarios.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Test Planning</span>
+          <span class="tech-tag">STP/STD/STR</span>
+          <span class="tech-tag">Bug Reporting</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 02</div>
+        <div class="project-name">Multi-Tenant Admin & Package Synchronization</div>
+        <div class="project-desc">API automation for admin/tenant creation, license/package sync, overlapping date edge cases, and duplicate prevention using Swagger (Admin APIs) and JSON-based sync payloads.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Playwright API</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Swagger</span>
+          <span class="tech-tag">AWS S3</span>
+          <span class="tech-tag">MSSQL</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 03</div>
+        <div class="project-name">Multi-Client Invitation & Registration Flow</div>
+        <div class="project-desc">E2E automation for cross-client user invitation, Gmail verification, registration vs. login state handling, and multi-tenant session flows — stable in headless CI environments.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Playwright UI</span>
+          <span class="tech-tag">Gmail Automation</span>
+          <span class="tech-tag">Multi-tab</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 04</div>
+        <div class="project-name">Tenant Switching & Access Token Validation</div>
+        <div class="project-desc">Security-focused test suite validating tenant isolation, access token regeneration, redirect flows, and permission verification — detecting token inconsistencies and session integrity issues.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Playwright</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">Token Inspection</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 05</div>
+        <div class="project-name">Performance Testing — License Management (k6)</div>
+        <div class="project-desc">Load & stress testing for regular vs. floating license concurrency, parallel session validation, custom k6 metrics (active sessions, latency, failures), and license release verification.</div>
+        <div class="project-tech">
+          <span class="tech-tag">k6</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">Custom Metrics</span>
+          <span class="tech-tag">Thresholds</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 06</div>
+        <div class="project-name">AI Prompt Engineering — Techdin (Legaltech)</div>
+        <div class="project-desc">Designed structured, reusable prompt templates for professional legaltech Q&A, reducing hallucinations and enabling QA validation of AI-generated outputs against structured datasets.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Prompt Engineering</span>
+          <span class="tech-tag">AI Validation</span>
+          <span class="tech-tag">Excel Pipelines</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 07</div>
+        <div class="project-name">Custom Web Scraper</div>
+        <div class="project-desc">Automated data extraction tool built in Node.js with DOM parsing, data normalization, and comparison against expected datasets — integrated into automated QA validation pipelines.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">DOM Parsing</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Project 08</div>
+        <div class="project-name">Password, Security & Token Flow Validation</div>
+        <div class="project-desc">Authentication edge case testing: password replacement via API, commit vs. regular login behavior, and token persistence validation via JSON snapshots — focused on security-critical flows.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Playwright</span>
+          <span class="tech-tag">REST API</span>
+          <span class="tech-tag">Auth Flows</span>
+          <span class="tech-tag">JSON</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="side-projects">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="num">04.</span>
+      <h2>GitHub Side Projects</h2>
+    </div>
+    <p class="section-copy">Selected public repositories from my GitHub covering Playwright framework design, CI pipelines, browser tooling, and smaller product experiments.</p>
+    <div class="repo-grid">
+      <div class="repo-card">
+        <div class="repo-top">
+          <div>
+            <div class="repo-num">Repo 01</div>
+            <div class="repo-name">QA-Lead-Enterprise-Project</div>
+          </div>
+          <a href="https://github.com/asaf-1/QA-Lead-Enterprise-Project" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
+        </div>
+        <div class="repo-desc">Production-ready Playwright architecture project for ParaBank covering end-to-end UI flows, API validation, OpenAPI checks, and a real curl-based account creation step.</div>
+        <div class="repo-tags">
+          <span class="tech-tag">Playwright</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">OpenAPI</span>
+          <span class="tech-tag">Jenkins</span>
+          <span class="tech-tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-top">
+          <div>
+            <div class="repo-num">Repo 02</div>
+            <div class="repo-name">CrawlitChromeExtension</div>
+          </div>
+          <a href="https://github.com/asaf-1/CrawlitChromeExtension" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
+        </div>
+        <div class="repo-desc">Chrome extension for scanning the current page or a crawl target, collecting downloadable file candidates, and exporting or downloading the results from a lightweight popup workflow.</div>
+        <div class="repo-tags">
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Chrome Extension</span>
+          <span class="tech-tag">CSV Export</span>
+          <span class="tech-tag">Service Worker</span>
+        </div>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-top">
+          <div>
+            <div class="repo-num">Repo 03</div>
+            <div class="repo-name">jenkins-pipelines</div>
+          </div>
+          <a href="https://github.com/asaf-1/jenkins-pipelines" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
+        </div>
+        <div class="repo-desc">Central Jenkins pipeline repository that detects project type and runs the right build or test flow across Node.js, Python, Java, and static utility repositories.</div>
+        <div class="repo-tags">
+          <span class="tech-tag">Groovy</span>
+          <span class="tech-tag">Jenkins</span>
+          <span class="tech-tag">CI/CD</span>
+          <span class="tech-tag">Multi-Repo</span>
+        </div>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-top">
+          <div>
+            <div class="repo-num">Repo 04</div>
+            <div class="repo-name">Israelite-News-Hub</div>
+          </div>
+          <a href="https://github.com/asaf-1/Israelite-News-Hub" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
+        </div>
+        <div class="repo-desc">Next.js news-hub prototype built with TypeScript and CSS, structured as a small content product and set up for deployment with a Render configuration.</div>
+        <div class="repo-tags">
+          <span class="tech-tag">Next.js</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">Render</span>
+        </div>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-top">
+          <div>
+            <div class="repo-num">Repo 05</div>
+            <div class="repo-name">Ness-Project</div>
+          </div>
+          <a href="https://github.com/asaf-1/Ness-Project" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
+        </div>
+        <div class="repo-desc">Public TypeScript interview project prepared for Ness reviewers and included as part of the portfolio to show code organization, delivery discipline, and practical implementation work.</div>
+        <div class="repo-tags">
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">Interview Build</span>
+          <span class="tech-tag">Portfolio Repo</span>
+        </div>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-top">
+          <div>
+            <div class="repo-num">Repo 06</div>
+            <div class="repo-name">Mini-Projects-</div>
+          </div>
+          <a href="https://github.com/asaf-1/Mini-Projects-" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
+        </div>
+        <div class="repo-desc">Collection repository for smaller Python projects and experiments, useful for showing breadth, iteration speed, and the habit of shipping compact standalone tools.</div>
+        <div class="repo-tags">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Mini Apps</span>
+          <span class="tech-tag">Utilities</span>
+          <span class="tech-tag">Experiments</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="num">05.</span>
+      <h2>Get in Touch</h2>
+    </div>
+    <div class="contact-block">
+      <div class="contact-text">
+        <h3>Open to QA roles — Manual, Automation & SDET</h3>
+        <p>I'm actively looking for my next role as a QA Automation Engineer or SDET. If you're building high-quality products and need someone who can own quality end-to-end — from test planning through production debugging — let's talk.</p>
+        <a href="mailto:asafnuriqa@gmail.com" class="btn btn-primary" style="display:inline-block; margin-top: 0.5rem;">Send me an email</a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:asafnuriqa@gmail.com" class="contact-link">
+          <div class="link-icon">@</div>
+          asafnuriqa@gmail.com
+        </a>
+        <a href="tel:+972524200706" class="contact-link">
+          <div class="link-icon">#</div>
+          +972 52-420-0706
+        </a>
+        <a href="https://www.linkedin.com/in/asaf-nuri" target="_blank" class="contact-link">
+          <div class="link-icon">in</div>
+          linkedin.com/in/asaf-nuri
+        </a>
+        <a href="https://github.com/asaf-1" target="_blank" class="contact-link">
+          <div class="link-icon">&lt;/&gt;</div>
+          github.com/asaf-1
+        </a>
+        <a href="https://drive.google.com/drive/folders/12PvT2vXk_xjch4lv_2h6Pzeco6Wt9WV" target="_blank" class="contact-link">
+          <div class="link-icon">▶</div>
+          Portfolio Drive
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built for <span>Asaf Nuri</span> · QA Automation Engineer · Tel Aviv, Israel</p>
+</footer>
+
+</body>
+</html>
