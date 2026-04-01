@@ -1,5 +1,13 @@
 # 💫 About Me:
-## About Me<br><br>QA Engineer with 5 years of experience in manual and automation testing for complex SaaS and AI-based systems.  Specialized in building and maintaining end-to-end automation frameworks with Playwright and TypeScript across UI, API, and backend flows.<br><br>## Highlight<br>- **Multi-tenant Playwright Automation Framework**  <br>  Built a full automation framework from scratch for complex SaaS flows including invitations, tenant switching, licensing, user management, and session handling.<br><br>- **Admin API Sync & Customer Packages Testing**  <br>  Created advanced test scenarios for syncing admins, tenants, roles, packages, expired/future packages, duplicate orders, and validation across backend logic.<br><br>- **ParaBank E2E Assignment Project**  <br>  Built a hybrid project covering UI, API, and curl flows: registration, login, account creation, transfer flow, and negative scenarios.<br><br>- **Jenkins Shared Library / Monorepo CI Project**  <br>  Worked on a Jenkins-based CI setup with Docker and shared pipeline logic for Playwright, Node.js, and Python projects.<br><br>- **Google Sheets + AI Automation Project**  <br>  Built automation flows that read prompts from Google Sheets and send responses back dynamically using different AI providers.<br><br>- **Universal Downloader Extension Fix**  <br>  Worked on debugging and improving single-page file scanning/downloading logic in a browser extension.<br><br>
+QA Engineer with 5 years of experience in manual and automation testing for complex SaaS and AI-based systems.  
+Focused on Playwright + TypeScript automation across UI, API, and backend flows.
+
+## Highlights
+- Multi-tenant Playwright automation for SaaS platforms
+- Admin API sync and customer package validation scenarios
+- UI, API, and curl-based end-to-end testing
+- Jenkins, Docker, and CI automation workflows
+- Google Sheets + AI integration projects
 
 ## 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/asaf-nuri/) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:asafnuriqa@gmail.com) 
