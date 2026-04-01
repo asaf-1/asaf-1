@@ -34,6 +34,7 @@
     overflow-x: hidden;
   }
 
+  /* Grid noise overlay */
   body::before {
     content: '';
     position: fixed;
@@ -46,6 +47,7 @@
     z-index: 0;
   }
 
+  /* NAV */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -77,15 +79,19 @@
   }
   nav ul a:hover { color: var(--teal); }
 
+  /* SECTIONS */
   section { position: relative; z-index: 1; }
 
+  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 8rem 3rem 4rem;
+    width: 100%;
     max-width: 900px;
+    margin: 0 auto;
   }
   .hero-label {
     font-family: var(--mono);
@@ -113,6 +119,10 @@
     letter-spacing: -0.02em;
     color: var(--text);
     margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.22em;
   }
   .hero h1 span { color: var(--teal); }
   .hero .tagline {
@@ -169,6 +179,7 @@
     letter-spacing: 0.05em;
   }
 
+  /* SHARED SECTION STYLE */
   .section-inner {
     max-width: 900px;
     margin: 0 auto;
@@ -200,6 +211,7 @@
     background: rgba(255,255,255,0.07);
   }
 
+  /* SKILLS */
   #skills { background: var(--bg2); }
   .skills-grid {
     display: grid;
@@ -236,6 +248,7 @@
     padding: 2px 8px;
   }
 
+  /* EXPERIENCE */
   .exp-list { display: flex; flex-direction: column; gap: 0; }
   .exp-item {
     display: grid;
@@ -290,6 +303,7 @@
     padding: 2px 8px;
   }
 
+  /* PROJECTS */
   #projects { background: var(--bg2); }
   .projects-grid {
     display: grid;
@@ -347,6 +361,7 @@
     padding: 2px 7px;
   }
 
+  /* GITHUB SIDE PROJECTS */
   #side-projects { background: var(--bg); }
   .section-copy {
     max-width: 680px;
@@ -425,6 +440,7 @@
     gap: 0.35rem;
   }
 
+  /* CONTACT */
   .contact-block {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -474,6 +490,7 @@
     font-size: 13px;
   }
 
+  /* FOOTER */
   footer {
     position: relative;
     z-index: 1;
@@ -489,6 +506,7 @@
   }
   footer span { color: var(--teal); }
 
+  /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -503,6 +521,7 @@
   .hero .hero-ctas    { animation-delay: 0.45s; }
   .hero .hero-stats   { animation-delay: 0.55s; }
 
+  /* RESPONSIVE */
   @media (max-width: 700px) {
     nav { padding: 0 1.25rem; }
     nav ul { gap: 1rem; }
@@ -515,6 +534,7 @@
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <div class="logo">asaf_nuri.qa</div>
   <ul>
@@ -526,10 +546,11 @@
   </ul>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
   <div class="hero">
     <div class="hero-label">Available for hire · Tel Aviv, Israel</div>
-    <h1>Asaf<br/><span>Nuri</span></h1>
+    <h1>Asaf <span>Nuri</span></h1>
     <p class="tagline">Senior QA Automation Engineer specializing in Playwright (TypeScript), API validation, performance testing, and building end-to-end automation infrastructure from scratch.</p>
     <div class="hero-ctas">
       <a href="mailto:asafnuriqa@gmail.com" class="btn btn-primary">Get in touch</a>
@@ -557,6 +578,7 @@
   </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
   <div class="section-inner">
     <div class="section-heading">
@@ -632,6 +654,7 @@
   </div>
 </section>
 
+<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-inner">
     <div class="section-heading">
@@ -639,13 +662,14 @@
       <h2>Experience</h2>
     </div>
     <div class="exp-list">
+
       <div class="exp-item">
         <div class="exp-meta">
           <div class="exp-period">Feb 2025 – Present</div>
           <div class="exp-company">BUSOFT</div>
           <div class="exp-loc">Tel Aviv, Israel</div>
         </div>
-        <div>
+        <div class="exp-content">
           <div class="exp-role">QA Automation Engineer (Manual & Automation)</div>
           <ul class="exp-desc">
             <li>Built a full E2E Playwright (TypeScript) automation infrastructure from scratch — 190+ test cases for a complex multi-tenant CRM SaaS on Azure.</li>
@@ -673,7 +697,7 @@
           <div class="exp-company">ROKKA.AI</div>
           <div class="exp-loc">Tel Aviv, Israel</div>
         </div>
-        <div>
+        <div class="exp-content">
           <div class="exp-role">Quality Assurance / QC Engineer</div>
           <ul class="exp-desc">
             <li>Planned and executed full testing cycles: sanity, regression, functional, non-functional, and monkey testing for an AI-based campaign management system.</li>
@@ -698,17 +722,19 @@
           <div class="exp-company">Israeli Ministry of Education</div>
           <div class="exp-loc">Israel</div>
         </div>
-        <div>
+        <div class="exp-content">
           <div class="exp-role">English Language Teacher (High School)</div>
           <ul class="exp-desc">
             <li>Educated and assessed students in communication and language — skills that directly inform clear bug reporting, documentation, and cross-team collaboration in QA.</li>
           </ul>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="section-inner">
     <div class="section-heading">
@@ -716,6 +742,7 @@
       <h2>Key Projects</h2>
     </div>
     <div class="projects-grid">
+
       <div class="project-card">
         <div class="project-num">Project 01</div>
         <div class="project-name">QA Documentation Pack — STP / STD / STR</div>
@@ -777,7 +804,7 @@
       <div class="project-card">
         <div class="project-num">Project 06</div>
         <div class="project-name">AI Prompt Engineering — Techdin (Legaltech)</div>
-        <div class="project-desc">Designed structured, reusable prompt templates for professional legaltech Q&A, reducing hallucinations and enabling QA validation of AI-generated outputs against structured datasets.</div>
+        <div class="project-desc">Designed structured, reusable prompt templates for professional legaltech Q&amp;A, reducing hallucinations and enabling QA validation of AI-generated outputs against structured datasets.</div>
         <div class="project-tech">
           <span class="tech-tag">Prompt Engineering</span>
           <span class="tech-tag">AI Validation</span>
@@ -807,10 +834,12 @@
           <span class="tech-tag">JSON</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- GITHUB SIDE PROJECTS -->
 <section id="side-projects">
   <div class="section-inner">
     <div class="section-heading">
@@ -819,6 +848,7 @@
     </div>
     <p class="section-copy">Selected public repositories from my GitHub covering Playwright framework design, CI pipelines, browser tooling, and smaller product experiments.</p>
     <div class="repo-grid">
+
       <div class="repo-card">
         <div class="repo-top">
           <div>
@@ -920,10 +950,12 @@
           <span class="tech-tag">Experiments</span>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
     <div class="section-heading">
@@ -962,6 +994,7 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <p>Designed & built for <span>Asaf Nuri</span> · QA Automation Engineer · Tel Aviv, Israel</p>
 </footer>
