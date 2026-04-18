@@ -362,8 +362,9 @@
     padding: 2px 7px;
   }
 
-  /* GITHUB SIDE PROJECTS */
-  #side-projects { background: var(--bg); }
+  /* DELIVERY & GITHUB SIDE PROJECTS */
+  #delivery { background: var(--bg); }
+  #side-projects { background: var(--bg2); }
   .section-copy {
     max-width: 680px;
     margin: -1rem 0 2rem;
@@ -537,11 +538,12 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Asaf Nuri | QA Engineer</div>
+  <div class="logo">Asaf Nuri | QA Automation Architect</div>
   <ul>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#delivery">CI</a></li>
     <li><a href="#side-projects">GitHub</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -552,7 +554,7 @@
   <div class="hero">
     <div class="hero-label">Available for hire · Tel Aviv, Israel</div>
     <h1>Asaf <span>Nuri</span></h1>
-    <p class="tagline">Senior QA Automation Engineer specializing in Playwright (TypeScript), API validation, performance testing, and building end-to-end automation infrastructure from scratch for companies and R&D teams.</p>
+    <p class="tagline">Senior QA Automation Engineer specializing in Playwright (TypeScript), API validation, performance testing, GenAI and agentic AI workflows, and QA automation orchestration for companies and R&amp;D teams.</p>
     <div class="hero-ctas">
       <a href="mailto:asafnuriqa@gmail.com" class="btn btn-primary">Get in touch</a>
       <a href="https://www.linkedin.com/in/asaf-nuri" target="_blank" class="btn btn-ghost">LinkedIn →</a>
@@ -612,6 +614,8 @@
       <div class="skill-card">
         <div class="skill-card-title">Languages & Tools</div>
         <div class="skill-tags">
+          <span class="tag">Docker</span>
+          <span class="tag">Jenkins</span>
           <span class="tag">TypeScript</span>
           <span class="tag">JavaScript</span>
           <span class="tag">Node.js</span>
@@ -632,11 +636,13 @@
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-card-title">AI & Data Workflows</div>
+        <div class="skill-card-title">AI & Agentic Workflows</div>
         <div class="skill-tags">
+          <span class="tag">GenAI</span>
+          <span class="tag">Agentic AI</span>
+          <span class="tag">Workflow Orchestration</span>
+          <span class="tag">QA Automation Orchestration</span>
           <span class="tag">Prompt Engineering</span>
-          <span class="tag">AI Test Generation</span>
-          <span class="tag">Excel Pipelines</span>
           <span class="tag">AI Output Validation</span>
         </div>
       </div>
@@ -840,14 +846,76 @@
   </div>
 </section>
 
+<!-- DELIVERY -->
+<section id="delivery">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="num">04.</span>
+      <h2>CI / Docker / Delivery</h2>
+    </div>
+    <p class="section-copy">Hands-on delivery work around Dockerized execution, Jenkins pipelines, CI process design, and QA automation orchestration across local, multi-repo, and showcase workflows.</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-num">Focus 01</div>
+        <div class="project-name">Dockerized Test Execution</div>
+        <div class="project-desc">Set up repeatable Docker-based execution for Playwright and Node.js workflows so local runs, CI jobs, and demo environments behave consistently and are easier to debug.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Playwright</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Reproducibility</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Focus 02</div>
+        <div class="project-name">Jenkins Pipeline Design</div>
+        <div class="project-desc">Built and organized Jenkins-driven CI flows that choose the right test or build path, support QA stages, and keep delivery predictable across different repository types.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Jenkins</span>
+          <span class="tech-tag">CI/CD</span>
+          <span class="tech-tag">Multi-Repo</span>
+          <span class="tech-tag">Release QA</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Focus 03</div>
+        <div class="project-name">QA Automation Orchestration</div>
+        <div class="project-desc">Coordinated UI, API, data, and AI-oriented validation into repeatable QA processes with pipeline gating, logs, reports, and faster debugging when failures happen.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Orchestration</span>
+          <span class="tech-tag">UI / API</span>
+          <span class="tech-tag">Reporting</span>
+          <span class="tech-tag">Debugging</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">Focus 04</div>
+        <div class="project-name">Public-Safe Demo Delivery</div>
+        <div class="project-desc">Structured portfolio demos so Docker, CI, and agentic workflow concepts can be shown publicly without exposing private enterprise code or internal environment details.</div>
+        <div class="project-tech">
+          <span class="tech-tag">Portfolio Delivery</span>
+          <span class="tech-tag">Demo Safety</span>
+          <span class="tech-tag">Documentation</span>
+          <span class="tech-tag">Workflow Design</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- GITHUB SIDE PROJECTS -->
 <section id="side-projects">
   <div class="section-inner">
     <div class="section-heading">
-      <span class="num">04.</span>
+      <span class="num">05.</span>
       <h2>GitHub Side Projects</h2>
     </div>
-    <p class="section-copy">Selected public repositories from my GitHub covering Playwright framework design, CI pipelines, browser tooling, and smaller product experiments.</p>
+    <p class="section-copy">Selected GitHub work, including public repositories and selected private showcase demos, covering Playwright framework design, CI pipelines, browser tooling, agentic AI, and smaller product experiments.</p>
     <div class="repo-grid">
 
       <div class="repo-card">
@@ -876,7 +944,7 @@
           </div>
           <a href="https://github.com/asaf-1/AI-Agentic-Project" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
         </div>
-        <div class="repo-desc">Local-first agentic infrastructure demo showing how Playwright, Obsidian workflow, Docker, Jenkins, and public-safe repo rules can work together in one reusable QA portfolio project.</div>
+        <div class="repo-desc">Local-first agentic QA infrastructure demo showing how Playwright, Obsidian workflow, Docker, Jenkins, and public-safe repo rules can work together in one reusable automation portfolio project.</div>
         <div class="repo-tags">
           <span class="tech-tag">Node.js</span>
           <span class="tech-tag">Playwright</span>
@@ -890,6 +958,23 @@
         <div class="repo-top">
           <div>
             <div class="repo-num">Repo 03</div>
+            <div class="repo-name">GenAI + AgenticAI Demo</div>
+          </div>
+          <a href="https://github.com/asaf-1/GenAI-AgenticAI-Demo" target="_blank" rel="noreferrer" class="repo-link">Private Repo</a>
+        </div>
+        <div class="repo-desc">Private showcase repository for GenAI and agentic AI workflows, centered on orchestration patterns, local-first automation, Dockerized execution, CI discipline, and practical implementation work that complements the QA automation side of the portfolio.</div>
+        <div class="repo-tags">
+          <span class="tech-tag">GenAI</span>
+          <span class="tech-tag">Agentic AI</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">CI/CD</span>
+        </div>
+      </div>
+
+      <div class="repo-card">
+        <div class="repo-top">
+          <div>
+            <div class="repo-num">Repo 04</div>
             <div class="repo-name">jenkins-pipelines</div>
           </div>
           <a href="https://github.com/asaf-1/jenkins-pipelines" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
@@ -906,7 +991,7 @@
       <div class="repo-card">
         <div class="repo-top">
           <div>
-            <div class="repo-num">Repo 04</div>
+            <div class="repo-num">Repo 05</div>
             <div class="repo-name">GO-ParaBank</div>
           </div>
           <a href="https://github.com/asaf-1/GO-ParaBank" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
@@ -924,7 +1009,7 @@
       <div class="repo-card">
         <div class="repo-top">
           <div>
-            <div class="repo-num">Repo 05</div>
+            <div class="repo-num">Repo 06</div>
             <div class="repo-name">CrawlitChromeExtension</div>
           </div>
           <a href="https://github.com/asaf-1/CrawlitChromeExtension" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
@@ -941,7 +1026,7 @@
       <div class="repo-card">
         <div class="repo-top">
           <div>
-            <div class="repo-num">Repo 06</div>
+            <div class="repo-num">Repo 07</div>
             <div class="repo-name">side-projects</div>
           </div>
           <a href="https://github.com/asaf-1/Mini-Projects-" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
@@ -957,7 +1042,7 @@
       <div class="repo-card">
         <div class="repo-top">
           <div>
-            <div class="repo-num">Repo 07</div>
+            <div class="repo-num">Repo 08</div>
             <div class="repo-name">Israelite-News-Hub</div>
           </div>
           <a href="https://github.com/asaf-1/Israelite-News-Hub" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
@@ -974,7 +1059,7 @@
       <div class="repo-card">
         <div class="repo-top">
           <div>
-            <div class="repo-num">Repo 08</div>
+            <div class="repo-num">Repo 09</div>
             <div class="repo-name">Ness-Project</div>
           </div>
           <a href="https://github.com/asaf-1/Ness-Project" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
@@ -990,7 +1075,7 @@
       <div class="repo-card">
         <div class="repo-top">
           <div>
-            <div class="repo-num">Repo 09</div>
+            <div class="repo-num">Repo 10</div>
             <div class="repo-name">Amiio-RealEstate-Project</div>
           </div>
           <a href="https://github.com/asaf-1/Amiio-RealEstate-Project" target="_blank" rel="noreferrer" class="repo-link">Open Repo</a>
@@ -1013,7 +1098,7 @@
 <section id="contact">
   <div class="section-inner">
     <div class="section-heading">
-      <span class="num">05.</span>
+      <span class="num">06.</span>
       <h2>Get in Touch</h2>
     </div>
     <div class="contact-block">
