@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Asaf Nuri — QA Automation Architect | Playwright | API Testing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#080b10;--surface:#0d1117;--surface2:#111820;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --text:#e8edf5;--muted:#6b7a8d;
+  --accent:#00d4ff;--accent2:#7b61ff;--accent3:#00ff9d;--danger:#ff4d6d;
+  --glow:rgba(0,212,255,0.18);--glow2:rgba(123,97,255,0.18);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#080b10}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:default;margin:0;min-height:100vh;width:100%}
+
+/* Site-wide inner constraint */
+.inner{max-width:1280px;margin:0 auto;width:100%}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:.4;max-width:1440px;left:50%;transform:translateX(-50%);width:100%}
+
+/* ─── Nav ─── */
+nav{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:1440px;z-index:100;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);backdrop-filter:blur(20px);background:rgba(8,11,16,.8)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-name{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--text);letter-spacing:.04em}
+.nav-logo-sep{width:1px;height:14px;background:var(--border2);align-self:center}
+.nav-logo-role{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-status{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;color:var(--accent3);letter-spacing:.1em}
+.status-dot{width:6px;height:6px;background:var(--accent3);border-radius:50%;animation:pulse-dot 2.4s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
+
+/* ─── Hero ─── */
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;padding:100px 48px 80px;position:relative;overflow:hidden;min-height:0;max-width:1440px}
+.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,.022) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero-glow{position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.07) 0%,transparent 70%);top:-200px;right:-100px;pointer-events:none;animation:float-glow 9s ease-in-out infinite}
+.hero-glow2{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(123,97,255,.06) 0%,transparent 70%);bottom:-100px;left:60px;pointer-events:none;animation:float-glow 12s ease-in-out infinite reverse}
+@keyframes float-glow{0%,100%{transform:translate(0,0)}50%{transform:translate(28px,-28px)}}
+
+.hero-left{position:relative;z-index:2}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:12px;opacity:0;animation:fade-up .6s .2s ease forwards}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--accent)}
+.hero-name{font-family:'Inter',sans-serif;font-size:clamp(36px,4.5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:10px;opacity:0;animation:fade-up .7s .35s ease forwards}
+.hero-name span{display:block;background:linear-gradient(135deg,#fff 40%,rgba(232,237,245,.55) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-name span.dim{background:linear-gradient(135deg,rgba(232,237,245,.7) 0%,rgba(232,237,245,.2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-title{font-family:'DM Mono',monospace;font-size:16px;letter-spacing:.08em;color:rgba(232,237,245,.88);margin-bottom:24px;opacity:0;animation:fade-up .7s .45s ease forwards}
+.hero-desc{font-family:'Inter',sans-serif;font-size:17px;line-height:1.8;color:rgba(232,237,245,.76);max-width:560px;margin-bottom:48px;font-weight:400;opacity:0;animation:fade-up .7s .55s ease forwards}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fade-up .7s .65s ease forwards}
+.btn-primary{padding:13px 30px;background:var(--accent);color:var(--bg);font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:4px;transition:box-shadow .3s,transform .2s}
+.btn-primary:hover{box-shadow:0 0 36px rgba(0,212,255,.38);transform:translateY(-1px)}
+.btn-secondary{padding:13px 30px;border:1px solid var(--border2);color:var(--text);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:4px;background:transparent;transition:border-color .3s,background .3s}
+.btn-secondary:hover{border-color:var(--accent);background:rgba(0,212,255,.04)}
+.hero-stats{display:flex;margin-top:64px;opacity:0;animation:fade-up .7s .75s ease forwards}
+.stat{padding:0 40px 0 0;border-right:1px solid var(--border2);margin-right:40px}
+.stat:last-child{border-right:none;margin-right:0}
+.stat-num{font-family:'Inter',sans-serif;font-weight:700;font-size:36px;color:var(--accent);line-height:1;margin-bottom:6px;letter-spacing:-.02em}
+.stat-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ─── Terminal ─── */
+.hero-right{position:relative;z-index:2;display:flex;justify-content:flex-end;align-items:center;opacity:0;animation:fade-in 1s .8s ease forwards;min-width:0}
+.ai-terminal{width:100%;max-width:480px;background:var(--surface);border:1px solid var(--border2);border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,212,255,.04),0 40px 80px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.04)}
+.terminal-bar{padding:13px 18px;background:rgba(255,255,255,.025);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px}
+.t-dot{width:10px;height:10px;border-radius:50%}
+.t-dot:nth-child(1){background:#ff5f56}.t-dot:nth-child(2){background:#ffbd2e}.t-dot:nth-child(3){background:#27c93f}
+.terminal-title{margin-left:auto;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.terminal-body{padding:22px;font-family:'DM Mono',monospace;font-size:11.5px;line-height:1.8;min-height:340px}
+.t-line{display:flex;gap:10px;margin-bottom:1px}
+.t-prompt{color:var(--accent);flex-shrink:0}
+.t-cmd{color:var(--text)}
+.t-out{color:var(--muted);padding-left:16px}
+.t-success{color:var(--accent3)}.t-warn{color:#ffbd2e}.t-accent{color:var(--accent)}.t-purple{color:var(--accent2)}
+.t-blink{display:inline-block;width:7px;height:13px;background:var(--accent);vertical-align:middle;animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ─── Section base ─── */
+section{padding:80px 48px;position:relative;z-index:2;max-width:1440px;margin-left:auto;margin-right:auto}
+section.hero{padding:100px 48px 80px}
+/* BIG: the label is now the primary display title */
+.section-label{font-family:'Inter',sans-serif;font-size:clamp(28px,3.5vw,44px);font-weight:700;letter-spacing:-.025em;color:var(--text);margin-bottom:12px;display:block;line-height:1.1}
+/* SMALL: the heading becomes a secondary mono descriptor */
+.section-heading{font-family:'DM Mono',monospace;font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:22px;line-height:1.2}
+.section-sub{color:rgba(232,237,245,.72);font-size:17px;max-width:620px;line-height:1.75;margin-bottom:48px}
+
+@keyframes fade-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+
+/* ─── Skills 3×2 strict ─── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.skill-card{background:var(--surface);padding:32px 28px;transition:background .3s;position:relative;overflow:hidden}
+.skill-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--glow),transparent);opacity:0;transition:opacity .3s}
+.skill-card:hover{background:var(--surface2)}
+.skill-card:hover::before{opacity:1}
+
+/* Category marker — plain mono label, no decoration */
+.skill-marker{
+  font-family:'DM Mono',monospace;
+  font-size:9px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:20px;
+  display:block;
+}
+.skill-card.s-ai   .skill-marker{color:var(--accent2)}
+.skill-card.s-data .skill-marker{color:var(--accent3)}
+.skill-card.s-lang .skill-marker{color:#e5b84a}
+.skill-card.s-doc  .skill-marker{color:var(--muted)}
+
+/* Large index number watermark */
+.skill-index{position:absolute;top:16px;right:20px;font-family:'Inter',sans-serif;font-weight:800;font-size:72px;line-height:1;color:rgba(255,255,255,.028);pointer-events:none;user-select:none}
+
+.skill-card-title{font-size:16px;font-weight:700;letter-spacing:.03em;margin-bottom:16px;color:var(--text)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:6px}
+.skill-tag{font-family:'DM Mono',monospace;font-size:10px;padding:5px 11px;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:3px;color:var(--muted);letter-spacing:.04em;transition:color .2s,border-color .2s,background .2s}
+.skill-tag:hover{color:var(--accent);border-color:rgba(0,212,255,.3);background:rgba(0,212,255,.05)}
+.skill-card.s-ai   .skill-tag:hover{color:var(--accent2);border-color:rgba(123,97,255,.3);background:rgba(123,97,255,.05)}
+.skill-card.s-data .skill-tag:hover{color:var(--accent3);border-color:rgba(0,255,157,.3);background:rgba(0,255,157,.04)}
+.skill-card.s-lang .skill-tag:hover{color:#e5b84a;border-color:rgba(229,184,74,.3);background:rgba(229,184,74,.04)}
+
+/* ─── Experience ─── */
+.experience-list{display:flex;flex-direction:column;gap:2px}
+.exp-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .3s}
+.exp-item:hover{border-color:var(--border2)}
+.exp-header{padding:28px 36px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:start;cursor:pointer}
+.exp-index{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.1em;padding-top:4px}
+.exp-company{font-size:20px;font-weight:700;margin-bottom:4px}
+.exp-role{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.07em}
+.exp-meta{text-align:right}
+.exp-period{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.08em;margin-bottom:4px}
+.exp-location{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
+.exp-body{padding:0 36px 28px;border-top:1px solid var(--border);padding-top:24px;display:none}
+.exp-item.open .exp-body{display:block}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:10px}
+.exp-bullets li{display:flex;gap:12px;font-size:14px;color:rgba(232,237,245,.75);line-height:1.6}
+.exp-bullets li::before{content:'→';color:var(--accent);flex-shrink:0;font-family:'DM Mono',monospace}
+.exp-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.stack-tag{font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;background:rgba(0,212,255,.06);border:1px solid rgba(0,212,255,.18);border-radius:3px;color:var(--accent)}
+
+/* ─── Agentic ─── */
+.agents-section{
+  background:linear-gradient(180deg,rgba(13,17,23,.96),rgba(10,14,20,.96));
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:80px 48px;
+  position:relative;
+  overflow:hidden;
+  max-width:1440px;
+  margin:24px auto;
+  box-shadow:0 24px 70px rgba(0,0,0,.24)
+}
+.agents-bg{position:absolute;inset:0;background:radial-gradient(ellipse 900px 500px at 50% 50%,rgba(123,97,255,.06),transparent);pointer-events:none}
+
+.agent-flow{display:flex;align-items:center;justify-content:center;overflow-x:auto;padding:36px 0 48px;gap:0}
+
+.agent-node{display:flex;flex-direction:column;align-items:center;gap:10px;flex-shrink:0}
+
+.agent-box{
+  width:152px;padding:20px 14px 16px;
+  background:var(--bg);
+  border:1px solid var(--nc,var(--accent));
+  border-radius:10px;text-align:center;
+  box-shadow:0 0 18px var(--ng,rgba(0,212,255,.18));
+  animation:node-breathe var(--nd,2.8s) ease-in-out infinite;
+  cursor:default;
+}
+@keyframes node-breathe{
+  0%,100%{box-shadow:0 0 18px var(--ng)}
+  50%{box-shadow:0 0 40px var(--ng),0 0 64px var(--ng)}
+}
+.agent-box:hover{transform:translateY(-2px);transition:transform .2s}
+
+/* node colors */
+.agent-box.nc-purple{--nc:var(--accent2);--ng:rgba(123,97,255,.22);--nd:2.4s}
+.agent-box.nc-green {--nc:var(--accent3);--ng:rgba(0,255,157,.2);--nd:3.2s}
+.agent-box.nc-cyan1 {--nc:var(--accent);--ng:rgba(0,212,255,.17);--nd:2.6s}
+.agent-box.nc-cyan2 {--nc:var(--accent);--ng:rgba(0,212,255,.17);--nd:3.0s}
+.agent-box.nc-cyan3 {--nc:var(--accent);--ng:rgba(0,212,255,.17);--nd:2.2s}
+
+/* text inside node */
+.agent-cat{
+  font-family:'DM Mono',monospace;
+  font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--nc,var(--accent));
+  margin-bottom:10px;opacity:.85;
+}
+.agent-name{font-size:11px;font-weight:700;letter-spacing:.04em;margin-bottom:3px;color:var(--text)}
+.agent-sub{font-family:'DM Mono',monospace;font-size:8.5px;color:var(--muted);letter-spacing:.04em}
+
+.agent-arrow{width:52px;flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.agent-arrow-line{width:100%;height:1px;background:linear-gradient(90deg,var(--border2),var(--accent),var(--border2));position:relative}
+.agent-arrow-line::after{content:'▶';position:absolute;right:-4px;top:50%;transform:translateY(-50%);font-size:7px;color:var(--accent)}
+.agent-arrow-label{position:absolute;bottom:-16px;font-family:'DM Mono',monospace;font-size:7.5px;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
+
+/* capability cards */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:32px}
+.cap-card{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:24px}
+.cap-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px}
+.cap-title{font-size:15px;font-weight:700;margin-bottom:8px}
+.cap-desc{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* ─── Projects ─── */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:28px;transition:border-color .3s,transform .3s;position:relative;overflow:hidden}
+.project-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.project-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.project-card:hover::after{transform:scaleX(1)}
+.project-num{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.15em;color:var(--accent);margin-bottom:14px}
+.project-title{font-size:18px;font-weight:700;margin-bottom:11px;line-height:1.35}
+.project-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.project-tags{display:flex;flex-wrap:wrap;gap:5px}
+.project-tag{font-family:'DM Mono',monospace;font-size:9px;padding:3px 8px;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:2px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* ─── CI ─── */
+.ci-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.ci-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:32px;position:relative;overflow:hidden;transition:border-color .3s}
+.ci-card:hover{border-color:var(--border2)}
+.ci-card-num{position:absolute;top:20px;right:24px;font-family:'Inter',sans-serif;font-weight:800;font-size:72px;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
+.ci-marker{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;display:block}
+.ci-card-title{font-size:18px;font-weight:700;margin-bottom:10px}
+.ci-card-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:18px}
+
+/* ─── GitHub ─── */
+.repos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.repo-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:22px 24px;transition:border-color .3s;display:flex;flex-direction:column;gap:10px;text-decoration:none}
+.repo-card:hover{border-color:var(--border2)}
+.repo-top{display:flex;align-items:center;justify-content:space-between}
+.repo-marker{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.repo-name{font-size:17px;font-weight:700;color:var(--text)}
+.repo-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.repo-tags{display:flex;flex-wrap:wrap;gap:5px}
+.repo-tag{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:2px;color:var(--muted)}
+.repo-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:2px;font-weight:600;letter-spacing:.06em}
+.badge-open{background:rgba(0,255,157,.08);color:var(--accent3);border:1px solid rgba(0,255,157,.2)}
+.badge-private{background:rgba(255,77,109,.08);color:var(--danger);border:1px solid rgba(255,77,109,.2)}
+
+/* ─── Contact ─── */
+.contact-section{padding:100px 48px;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1440px;margin:0 auto}
+.contact-glow{position:absolute;inset:0;background:radial-gradient(ellipse 700px 500px at 30% 50%,rgba(0,212,255,.05),transparent);pointer-events:none}
+.contact-left{position:relative;z-index:1}
+.contact-heading{font-family:'Inter',sans-serif;font-size:clamp(28px,3.5vw,48px);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin-bottom:20px}
+.contact-sub{color:var(--muted);font-size:15px;line-height:1.8;max-width:420px;margin-bottom:36px}
+.contact-email-link{display:inline-block;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.04em;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(0,212,255,.3);padding-bottom:2px;transition:border-color .2s,opacity .2s}
+.contact-email-link:hover{opacity:.7;border-color:transparent}
+.contact-right{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px}
+.contact-row{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-decoration:none;transition:border-color .25s,background .25s}
+.contact-row:hover{border-color:var(--border2);background:var(--surface2)}
+.contact-row-left{display:flex;align-items:center;gap:18px}
+.contact-row-type{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);flex-shrink:0;min-width:52px}
+.contact-row-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.contact-row-value{font-size:14px;color:var(--text)}
+.contact-row-arrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);transition:color .2s,transform .2s;flex-shrink:0}
+.contact-row:hover .contact-row-arrow{color:var(--accent);transform:translateX(3px)}
+
+/* ─── Footer ─── */
+footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;max-width:1440px;margin:0 auto}
+.footer-left,.footer-right{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em}
+
+/* ─── Reveal ─── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+@media(max-width:1100px){
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+  .projects-grid{grid-template-columns:1fr}
+  .repos-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  nav{padding:16px 24px;left:0;transform:none;max-width:100%}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;padding:100px 24px 60px;gap:0}
+  .hero-right{display:none}
+  .hero-desc{max-width:100%;font-size:16px}
+  .hero-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:40px}
+  .stat{padding:18px 0 0;margin:0;border-right:none;border-top:1px solid var(--border2)}
+  section{padding:60px 24px}
+  .ci-grid,.skills-grid,.projects-grid,.repos-grid,.cap-grid{grid-template-columns:1fr}
+  .agents-section{padding:60px 24px;margin:16px 24px;border-radius:16px}
+  .agent-flow{flex-direction:column;gap:14px;align-items:center;padding:28px 0 32px}
+  .agent-node{width:100%;max-width:280px}
+  .agent-box{width:100%;max-width:280px}
+  .agent-arrow{width:24px;height:34px;margin:0}
+  .agent-arrow-line{width:1px;height:100%;background:linear-gradient(180deg,var(--border2),var(--accent),var(--border2))}
+  .agent-arrow-line::after{content:'▼';left:50%;right:auto;top:auto;bottom:-7px;transform:translateX(-50%);font-size:8px}
+  .agent-arrow-label{display:none}
+  .contact-section{grid-template-columns:1fr;gap:48px;padding:80px 24px}
+  .exp-header{grid-template-columns:1fr;gap:12px}
+  .exp-meta{text-align:left}
+  footer{padding:20px 24px;flex-direction:column;gap:8px;text-align:center}
+}
+@media(max-width:640px){
+  nav{padding:14px 16px}
+  .nav-status{display:none}
+  .nav-logo{min-width:0}
+  .nav-logo-name{font-size:12px}
+  .nav-logo-role{font-size:10px;letter-spacing:.08em}
+  .hero{padding:92px 16px 52px}
+  .hero-eyebrow{font-size:9px;letter-spacing:.16em;gap:8px}
+  .hero-eyebrow::before{width:22px}
+  .hero-title{font-size:13px;line-height:1.5}
+  .hero-desc{font-size:15px;line-height:1.75;margin-bottom:32px}
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .btn-primary,.btn-secondary{text-align:center;width:100%}
+  .section-label{font-size:clamp(26px,9vw,38px)}
+  .section-heading{font-size:12px;letter-spacing:.12em}
+  .section-sub{font-size:15px;line-height:1.7}
+  .agents-section{padding:44px 16px;margin:12px 16px}
+  .skill-card,.project-card,.ci-card,.repo-card,.cap-card{padding:22px 18px}
+  .project-title,.ci-card-title,.repo-name,.skill-card-title{font-size:16px}
+  .project-desc,.ci-card-desc,.repo-desc,.cap-desc{font-size:12.5px}
+  .contact-section{padding:64px 16px}
+  .contact-row{padding:16px}
+  .contact-row-left{gap:12px}
+  .contact-row-value{font-size:13px;word-break:break-word}
+  footer{padding:18px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-name">Asaf Nuri</span>
+    <div class="nav-logo-sep"></div>
+    <span class="nav-logo-role">QA Automation Architect</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#agents">AI Agents</a></li>
+    <li><a href="#repos">GitHub</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div>Available · Tel Aviv</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">QA Automation Architect · Tel Aviv, Israel</div>
+    <div class="hero-name">
+      <span>Asaf</span><span class="dim">Nuri</span>
+    </div>
+    <div class="hero-title">PLAYWRIGHT • GENAI + AI-AGENTIC WORKFLOWS • WEB APPLICATIONS • API TESTING • E2E • SAAS</div>
+    <p class="hero-desc">QA Automation Architect focused on end-to-end quality for complex SaaS platforms, specializing in Playwright (TypeScript), API validation, performance testing, GenAI, agentic AI workflows, and QA automation orchestration for product companies and R&amp;D teams.</p>
+    <div class="hero-ctas">
+      <a href="mailto:asafnuriqa@gmail.com" class="btn-primary">Get in Touch</a>
+      <a href="https://github.com/asaf-1" class="btn-secondary" target="_blank">GitHub →</a>
+      <a href="https://www.linkedin.com/in/asaf-nuri" class="btn-secondary" target="_blank">LinkedIn →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years XP</div></div>
+      <div class="stat"><div class="stat-num">300+</div><div class="stat-label">Tests Built</div></div>
+      <div class="stat"><div class="stat-num">90%</div><div class="stat-label">Manual Reduced</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-label">Domains</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="ai-terminal">
+      <div class="terminal-bar">
+        <div class="t-dot"></div><div class="t-dot"></div><div class="t-dot"></div>
+        <div class="terminal-title">qa-agent · agentic-workflow-orchestrator</div>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <div class="t-line"><span class="t-prompt">❯</span><span class="t-cmd">npx qa-agent start --mode agentic</span></div>
+        <div class="t-out t-success">✓ QA Orchestration Engine initialized</div>
+        <div class="t-out t-accent">→ Connecting to AI validation layer...</div>
+        <div class="t-out t-success">✓ GenAI model linked [claude-3-opus]</div>
+        <div class="t-line" style="margin-top:10px"><span class="t-prompt">❯</span><span class="t-cmd">run-suite --scope full --env staging</span></div>
+        <div class="t-out t-purple">⟳ Agent: scanning UI mutations (Playwright)</div>
+        <div class="t-out t-purple">⟳ Agent: validating API contracts (Swagger)</div>
+        <div class="t-out t-purple">⟳ Agent: data integrity check (MSSQL)</div>
+        <div class="t-out t-success">✓ 194 / 194 tests passed · 0 failures</div>
+        <div class="t-out">  Coverage: 94.2% · Duration: 1m 38s</div>
+        <div class="t-line" style="margin-top:10px"><span class="t-prompt">❯</span><span class="t-cmd">ai-validate --output-check --schema ./schema.json</span></div>
+        <div class="t-out t-warn">⚠ AI response drift detected on field [summary]</div>
+        <div class="t-out t-success">✓ Hallucination guard triggered — flagged</div>
+        <div class="t-out t-success">✓ Report exported → /reports/run-latest</div>
+        <div class="t-line" style="margin-top:10px"><span class="t-prompt">❯</span><span class="t-cmd">docker push qa-suite:latest && jenkins trigger</span></div>
+        <div class="t-out t-success">✓ Pipeline queued → #187 · ETA 3m 20s</div>
+        <div class="t-line"><span class="t-prompt">❯</span><span class="t-blink"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Core Skills</div>
+  <h2 class="section-heading reveal">01 · Technical Skills</h2>
+  <p class="section-sub reveal">Precision tooling across every layer — UI, API, data, and AI validation.</p>
+  <div class="skills-grid reveal">
+
+    <div class="skill-card">
+      <div class="skill-index">01</div>
+      <div class="skill-marker">Automation &amp; Testing</div>
+      <div class="skill-card-title">End-to-End Quality</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Playwright (TS)</span><span class="skill-tag">E2E Automation</span>
+        <span class="skill-tag">Regression</span><span class="skill-tag">Sanity</span>
+        <span class="skill-tag">Exploratory</span><span class="skill-tag">Manual QA</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-index">02</div>
+      <div class="skill-marker">API &amp; Performance</div>
+      <div class="skill-card-title">Contract &amp; Load Testing</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Postman</span><span class="skill-tag">REST API</span>
+        <span class="skill-tag">Swagger/OpenAPI</span><span class="skill-tag">k6</span>
+        <span class="skill-tag">JMeter</span><span class="skill-tag">JWT / Auth</span>
+      </div>
+    </div>
+
+    <div class="skill-card s-ai">
+      <div class="skill-index">03</div>
+      <div class="skill-marker">AI &amp; Agentic</div>
+      <div class="skill-card-title">Intelligent Automation</div>
+      <div class="skill-tags">
+        <span class="skill-tag">GenAI</span><span class="skill-tag">Agentic AI</span>
+        <span class="skill-tag">Workflow Orchestration</span><span class="skill-tag">Prompt Engineering</span>
+        <span class="skill-tag">AI Output Validation</span><span class="skill-tag">QA Orchestration</span>
+      </div>
+    </div>
+
+    <div class="skill-card s-lang">
+      <div class="skill-index">04</div>
+      <div class="skill-marker">Languages &amp; Tooling</div>
+      <div class="skill-card-title">Build &amp; Runtime Stack</div>
+      <div class="skill-tags">
+        <span class="skill-tag">TypeScript</span><span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Node.js</span><span class="skill-tag">Python</span>
+        <span class="skill-tag">Docker</span><span class="skill-tag">Jenkins</span>
+        <span class="skill-tag">Git / GitHub</span><span class="skill-tag">Azure CI/CD</span>
+      </div>
+    </div>
+
+    <div class="skill-card s-data">
+      <div class="skill-index">05</div>
+      <div class="skill-marker">Data &amp; Cloud</div>
+      <div class="skill-card-title">Storage &amp; Infrastructure</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MSSQL</span><span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">AWS S3</span><span class="skill-tag">Azure Boards</span>
+        <span class="skill-tag">Multi-Tenant</span><span class="skill-tag">Microservices</span>
+      </div>
+    </div>
+
+    <div class="skill-card s-doc">
+      <div class="skill-index">06</div>
+      <div class="skill-marker">Documentation &amp; Process</div>
+      <div class="skill-card-title">Planning &amp; Delivery</div>
+      <div class="skill-tags">
+        <span class="skill-tag">STP</span><span class="skill-tag">STD</span>
+        <span class="skill-tag">STR</span><span class="skill-tag">Bug Reports</span>
+        <span class="skill-tag">Jira</span><span class="skill-tag">Agile / Scrum</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="padding-top:0">
+  <div class="section-label">Experience</div>
+  <h2 class="section-heading reveal">02 · Experience</h2>
+  <p class="section-sub reveal">Building quality-first automation cultures from the ground up.</p>
+  <div class="experience-list reveal">
+
+    <div class="exp-item open">
+      <div class="exp-header" onclick="toggleExp(this)">
+        <div class="exp-index">01</div>
+        <div class="exp-main">
+          <div class="exp-company">BUSOFT</div>
+          <div class="exp-role">QA Automation Engineer — Manual &amp; Automation</div>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">Feb 2025 – Present</div>
+          <div class="exp-location">Tel Aviv, Israel</div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-bullets">
+          <li>Built a full E2E Playwright (TypeScript) automation infrastructure from scratch — 190+ test cases for a complex multi-tenant CRM SaaS on Azure.</li>
+          <li>Created comprehensive regression suite reducing manual testing time by ~90%.</li>
+          <li>Mentored QA engineers and led knowledge-sharing sessions on automation best practices.</li>
+          <li>Performed advanced API testing including SSO flows, token validation, and client–server integration via Postman.</li>
+          <li>Executed load and stress tests using k6 to improve system scalability.</li>
+          <li>Integrated financial systems into an ABP Web Platform; connected to AWS S3 and databases.</li>
+        </ul>
+        <div class="exp-stack">
+          <span class="stack-tag">Playwright</span><span class="stack-tag">TypeScript</span><span class="stack-tag">k6</span><span class="stack-tag">Postman</span><span class="stack-tag">Azure</span><span class="stack-tag">AWS S3</span><span class="stack-tag">MSSQL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header" onclick="toggleExp(this)">
+        <div class="exp-index">02</div>
+        <div class="exp-main">
+          <div class="exp-company">ROKKA.AI</div>
+          <div class="exp-role">Quality Assurance / QC Engineer</div>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">Nov 2021 – Nov 2024</div>
+          <div class="exp-location">Tel Aviv, Israel</div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-bullets">
+          <li>Planned and executed full testing cycles: sanity, regression, functional, non-functional, and monkey testing for an AI-based campaign management system.</li>
+          <li>Developed and integrated automated tests alongside manual flows — improved testing efficiency by 80%.</li>
+          <li>Authored professional test documentation: STP, STD, STR.</li>
+          <li>Conducted REST API testing using Postman; tracked all bugs and defects in Azure/Jira.</li>
+          <li>Contributed to release stability, production quality, and testing coverage improvements.</li>
+        </ul>
+        <div class="exp-stack">
+          <span class="stack-tag">Postman</span><span class="stack-tag">Azure Boards</span><span class="stack-tag">Jira</span><span class="stack-tag">Test Documentation</span><span class="stack-tag">AI Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header" onclick="toggleExp(this)">
+        <div class="exp-index">03</div>
+        <div class="exp-main">
+          <div class="exp-company">Israeli Ministry of Education</div>
+          <div class="exp-role">English Language Teacher — High School</div>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">2017 – 2020</div>
+          <div class="exp-location">Israel</div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <ul class="exp-bullets">
+          <li>Educated and assessed students in communication and language — skills that directly inform clear bug reporting, documentation, and cross-team collaboration in QA.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTIC AI -->
+<div class="agents-section" id="agents">
+  <div class="agents-bg"></div>
+  <div class="section-label">AI &amp; Automation Workflows</div>
+  <h2 class="section-heading reveal">03 · AI Architecture</h2>
+  <p class="section-sub reveal">Designing intelligent test systems where AI agents coordinate validation across UI, API, data, and model output layers — continuously and observably.</p>
+
+  <div class="agent-flow">
+
+    <div class="agent-node">
+      <div class="agent-box nc-purple">
+        <div class="agent-cat">GenAI · Control</div>
+        <div class="agent-name">Orchestrator</div>
+        <div class="agent-sub">AI Controller</div>
+      </div>
+    </div>
+
+    <div class="agent-arrow">
+      <div class="agent-arrow-line"></div>
+      <div class="agent-arrow-label">DISPATCH</div>
+    </div>
+
+    <div class="agent-node">
+      <div class="agent-box nc-cyan1">
+        <div class="agent-cat">Playwright · E2E</div>
+        <div class="agent-name">UI Agent</div>
+        <div class="agent-sub">Browser Automation</div>
+      </div>
+    </div>
+
+    <div class="agent-arrow">
+      <div class="agent-arrow-line"></div>
+      <div class="agent-arrow-label">RESULTS</div>
+    </div>
+
+    <div class="agent-node">
+      <div class="agent-box nc-cyan2">
+        <div class="agent-cat">REST · Swagger</div>
+        <div class="agent-name">API Agent</div>
+        <div class="agent-sub">Contract Validation</div>
+      </div>
+    </div>
+
+    <div class="agent-arrow">
+      <div class="agent-arrow-line"></div>
+      <div class="agent-arrow-label">VALIDATE</div>
+    </div>
+
+    <div class="agent-node">
+      <div class="agent-box nc-green">
+        <div class="agent-cat">Schema · Guard</div>
+        <div class="agent-name">AI Guard</div>
+        <div class="agent-sub">Output Validation</div>
+      </div>
+    </div>
+
+    <div class="agent-arrow">
+      <div class="agent-arrow-line"></div>
+      <div class="agent-arrow-label">REPORT</div>
+    </div>
+
+    <div class="agent-node">
+      <div class="agent-box nc-cyan3">
+        <div class="agent-cat">Jenkins · CI/CD</div>
+        <div class="agent-name">Reporter</div>
+        <div class="agent-sub">Pipeline &amp; Logs</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cap-grid reveal">
+    <div class="cap-card">
+      <div class="cap-label" style="color:var(--accent)">Capability 01</div>
+      <div class="cap-title">Self-Healing Tests</div>
+      <div class="cap-desc">AI agents detect selector drift and auto-repair test locators, reducing maintenance overhead by continuously learning UI patterns.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-label" style="color:var(--accent2)">Capability 02</div>
+      <div class="cap-title">Hallucination Detection</div>
+      <div class="cap-desc">Structured prompt templates and schema-based validators catch AI response drift, ensuring model outputs meet defined quality contracts.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-label" style="color:var(--accent3)">Capability 03</div>
+      <div class="cap-title">Pipeline Gating</div>
+      <div class="cap-desc">Quality gates block deployments when thresholds fail — integrated into Jenkins with custom metrics, real-time logs, and reports.</div>
+    </div>
+    <div class="cap-card">
+      <div class="cap-label" style="color:var(--muted)">Capability 04</div>
+      <div class="cap-title">Multi-Layer Orchestration</div>
+      <div class="cap-desc">UI, API, data, and AI-output validation coordinated into a single repeatable process — observable, debuggable, and reproducible.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Key Projects</div>
+  <h2 class="section-heading reveal">04 · Key Projects</h2>
+  <p class="section-sub reveal">Real-world projects solving complex validation problems at scale.</p>
+  <div class="projects-grid reveal">
+    <div class="project-card"><div class="project-num">PROJECT · 01</div><div class="project-title">QA Documentation Pack — STP / STD / STR</div><div class="project-desc">Full release-level QA documentation for complex multi-tenant SaaS flows covering user management, role/permission validation, license/session behavior, and data sync scenarios.</div><div class="project-tags"><span class="project-tag">Test Planning</span><span class="project-tag">STP/STD/STR</span><span class="project-tag">Bug Reporting</span></div></div>
+    <div class="project-card"><div class="project-num">PROJECT · 02</div><div class="project-title">Multi-Tenant Admin &amp; Package Synchronization</div><div class="project-desc">API automation for admin/tenant creation, license/package sync, overlapping date edge cases, and duplicate prevention using Swagger Admin APIs and JSON-based sync payloads.</div><div class="project-tags"><span class="project-tag">Playwright API</span><span class="project-tag">TypeScript</span><span class="project-tag">Swagger</span><span class="project-tag">AWS S3</span><span class="project-tag">MSSQL</span></div></div>
+    <div class="project-card"><div class="project-num">PROJECT · 03</div><div class="project-title">Multi-Client Invitation &amp; Registration Flow</div><div class="project-desc">E2E automation for cross-client user invitation, Gmail verification, registration vs. login state handling, and multi-tenant session flows — stable in headless CI environments.</div><div class="project-tags"><span class="project-tag">Playwright UI</span><span class="project-tag">Gmail Automation</span><span class="project-tag">Multi-tab</span></div></div>
+    <div class="project-card"><div class="project-num">PROJECT · 04</div><div class="project-title">Tenant Switching &amp; Access Token Validation</div><div class="project-desc">Security-focused test suite validating tenant isolation, access token regeneration, redirect flows, and permission verification — detecting token inconsistencies and session integrity issues.</div><div class="project-tags"><span class="project-tag">Playwright</span><span class="project-tag">REST API</span><span class="project-tag">Token Inspection</span></div></div>
+    <div class="project-card"><div class="project-num">PROJECT · 05</div><div class="project-title">Performance Testing — License Management (k6)</div><div class="project-desc">Load &amp; stress testing for regular vs. floating license concurrency, parallel session validation, custom k6 metrics, and license release verification.</div><div class="project-tags"><span class="project-tag">k6</span><span class="project-tag">REST API</span><span class="project-tag">Custom Metrics</span><span class="project-tag">Thresholds</span></div></div>
+    <div class="project-card"><div class="project-num">PROJECT · 06</div><div class="project-title">AI Prompt Engineering — Techdin (Legaltech)</div><div class="project-desc">Designed structured, reusable prompt templates for professional legaltech Q&amp;A, reducing hallucinations and enabling QA validation of AI-generated outputs against structured datasets.</div><div class="project-tags"><span class="project-tag">Prompt Engineering</span><span class="project-tag">AI Validation</span><span class="project-tag">Excel Pipelines</span></div></div>
+    <div class="project-card"><div class="project-num">PROJECT · 07</div><div class="project-title">Custom Web Scraper</div><div class="project-desc">Automated data extraction tool in Node.js with DOM parsing, data normalization, and comparison against expected datasets — integrated into QA validation pipelines.</div><div class="project-tags"><span class="project-tag">Node.js</span><span class="project-tag">JavaScript</span><span class="project-tag">DOM Parsing</span></div></div>
+    <div class="project-card"><div class="project-num">PROJECT · 08</div><div class="project-title">Password, Security &amp; Token Flow Validation</div><div class="project-desc">Authentication edge case testing: password replacement via API, commit vs. regular login behavior, and token persistence validation via JSON snapshots.</div><div class="project-tags"><span class="project-tag">Playwright</span><span class="project-tag">REST API</span><span class="project-tag">Auth Flows</span><span class="project-tag">JSON</span></div></div>
+  </div>
+</section>
+
+<!-- CI/CD -->
+<section style="padding-top:0">
+  <div class="section-label">CI/CD &amp; Delivery</div>
+  <h2 class="section-heading reveal">05 · CI / Docker / Delivery</h2>
+  <p class="section-sub reveal">Dockerized execution, Jenkins pipelines, and QA orchestration across local, multi-repo, and showcase workflows.</p>
+  <div class="ci-grid reveal">
+    <div class="ci-card">
+      <div class="ci-card-num">01</div>
+      <div class="ci-marker">Docker · Containers</div>
+      <div class="ci-card-title">Dockerized Test Execution</div>
+      <div class="ci-card-desc">Repeatable Docker-based execution for Playwright and Node.js workflows — consistent across local runs, CI jobs, and demo environments.</div>
+      <div class="project-tags"><span class="project-tag">Docker</span><span class="project-tag">Playwright</span><span class="project-tag">Node.js</span><span class="project-tag">Reproducibility</span></div>
+    </div>
+    <div class="ci-card">
+      <div class="ci-card-num">02</div>
+      <div class="ci-marker">Jenkins · Pipeline</div>
+      <div class="ci-card-title">Jenkins Pipeline Design</div>
+      <div class="ci-card-desc">Jenkins-driven CI flows that detect project type, run the right build or test path, and keep delivery predictable across multiple repository types.</div>
+      <div class="project-tags"><span class="project-tag">Jenkins</span><span class="project-tag">CI/CD</span><span class="project-tag">Multi-Repo</span><span class="project-tag">Release QA</span></div>
+    </div>
+    <div class="ci-card">
+      <div class="ci-card-num">03</div>
+      <div class="ci-marker">QA · Orchestration</div>
+      <div class="ci-card-title">QA Automation Orchestration</div>
+      <div class="ci-card-desc">UI, API, data, and AI-oriented validation coordinated into repeatable QA processes with pipeline gating, logs, and reports.</div>
+      <div class="project-tags"><span class="project-tag">Orchestration</span><span class="project-tag">UI / API</span><span class="project-tag">Reporting</span><span class="project-tag">Debugging</span></div>
+    </div>
+    <div class="ci-card">
+      <div class="ci-card-num">04</div>
+      <div class="ci-marker">Demo · Safety</div>
+      <div class="ci-card-title">Public-Safe Demo Delivery</div>
+      <div class="ci-card-desc">Portfolio demos structured so Docker, CI, and agentic workflow concepts can be shown publicly without exposing private enterprise code.</div>
+      <div class="project-tags"><span class="project-tag">Portfolio Delivery</span><span class="project-tag">Demo Safety</span><span class="project-tag">Documentation</span><span class="project-tag">Workflow Design</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB -->
+<section id="repos" style="padding-top:0">
+  <div class="section-label">GitHub Side Projects</div>
+  <h2 class="section-heading reveal">06 · GitHub</h2>
+  <p class="section-sub reveal">Selected public repositories covering Playwright architecture, CI pipelines, browser tooling, and agentic AI.</p>
+  <div class="repos-grid reveal">
+    <a href="https://github.com/asaf-1/QA-Lead-Enterprise-Project" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · playwright</span><span class="repo-badge badge-open">Public</span></div>
+      <div class="repo-name">QA-Lead-Enterprise-Project</div>
+      <div class="repo-desc">Production-ready Playwright architecture for ParaBank — E2E UI flows, API validation, OpenAPI checks, and curl-based account creation.</div>
+      <div class="repo-tags"><span class="repo-tag">Playwright</span><span class="repo-tag">TypeScript</span><span class="repo-tag">OpenAPI</span><span class="repo-tag">Jenkins</span><span class="repo-tag">Docker</span></div>
+    </a>
+    <a href="https://github.com/asaf-1/AI-Agentic-Project" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · agentic-ai</span><span class="repo-badge badge-open">Public</span></div>
+      <div class="repo-name">AI-Agentic-Project</div>
+      <div class="repo-desc">Local-first agentic QA infrastructure demo — Playwright, Obsidian workflow, Docker, Jenkins, and public-safe repo rules in one reusable project.</div>
+      <div class="repo-tags"><span class="repo-tag">Node.js</span><span class="repo-tag">Playwright</span><span class="repo-tag">Docker</span><span class="repo-tag">Jenkins</span><span class="repo-tag">Obsidian</span></div>
+    </a>
+    <a href="https://github.com/asaf-1/GenAI-AgenticAI-Demo" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · genai</span><span class="repo-badge badge-private">Private</span></div>
+      <div class="repo-name">GenAI + AgenticAI Demo</div>
+      <div class="repo-desc">Private showcase for GenAI and agentic AI workflows — orchestration patterns, local-first automation, Dockerized execution, and CI discipline.</div>
+      <div class="repo-tags"><span class="repo-tag">GenAI</span><span class="repo-tag">Agentic AI</span><span class="repo-tag">Docker</span><span class="repo-tag">CI/CD</span></div>
+    </a>
+    <a href="https://github.com/asaf-1/jenkins-pipelines" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · ci-cd</span><span class="repo-badge badge-open">Public</span></div>
+      <div class="repo-name">jenkins-pipelines</div>
+      <div class="repo-desc">Central Jenkins pipeline repo that auto-detects project type and runs the right build or test flow across Node.js, Python, Java, and static repos.</div>
+      <div class="repo-tags"><span class="repo-tag">Groovy</span><span class="repo-tag">Jenkins</span><span class="repo-tag">CI/CD</span><span class="repo-tag">Multi-Repo</span></div>
+    </a>
+    <a href="https://github.com/asaf-1/GO-ParaBank" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · golang</span><span class="repo-badge badge-open">Public</span></div>
+      <div class="repo-name">GO-ParaBank</div>
+      <div class="repo-desc">Go + Playwright automation framework for ParaBank — E2E, negative, and API testing with page objects, reusable business steps, Docker, and Jenkins-ready execution.</div>
+      <div class="repo-tags"><span class="repo-tag">Go</span><span class="repo-tag">Playwright</span><span class="repo-tag">API Testing</span><span class="repo-tag">Docker</span></div>
+    </a>
+    <a href="https://github.com/asaf-1/CrawlitChromeExtension" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · extension</span><span class="repo-badge badge-open">Public</span></div>
+      <div class="repo-name">CrawlitChromeExtension</div>
+      <div class="repo-desc">Chrome extension for scanning the current page or crawl target, collecting downloadable file candidates, and exporting results from a lightweight popup workflow.</div>
+      <div class="repo-tags"><span class="repo-tag">JavaScript</span><span class="repo-tag">Chrome Extension</span><span class="repo-tag">CSV Export</span><span class="repo-tag">Service Worker</span></div>
+    </a>
+    <a href="https://github.com/asaf-1/Amiio-RealEstate-Project" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · ai-demo</span><span class="repo-badge badge-open">Public</span></div>
+      <div class="repo-name">Amiio-RealEstate-Project</div>
+      <div class="repo-desc">AI real-estate operations demo app with portfolio dashboards, document review, AI Q&amp;A panel, and SQL/data-quality checks backed by a local SQLite database.</div>
+      <div class="repo-tags"><span class="repo-tag">Node.js</span><span class="repo-tag">SQLite</span><span class="repo-tag">Docker</span><span class="repo-tag">Jenkins</span></div>
+    </a>
+    <a href="https://github.com/asaf-1/Israelite-News-Hub" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · next.js</span><span class="repo-badge badge-open">Public</span></div>
+      <div class="repo-name">Israelite-News-Hub</div>
+      <div class="repo-desc">Next.js news-hub prototype built with TypeScript and CSS, structured as a small content product and set up for deployment with a Render configuration.</div>
+      <div class="repo-tags"><span class="repo-tag">Next.js</span><span class="repo-tag">TypeScript</span><span class="repo-tag">CSS</span><span class="repo-tag">Render</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-glow"></div>
+  <div class="contact-left reveal">
+    <div class="section-heading" style="margin-bottom:8px;">07 · Contact</div>
+    <div class="section-label" style="margin-bottom:20px;font-size:clamp(24px,3vw,40px);">Open to QA Automation Architect opportunities.</div>
+    <p class="contact-sub">I'm actively looking for QA Automation Architect roles where quality is taken seriously. If your team is building complex systems and wants someone who can own testing end-to-end — from automation design through production debugging — I'd like to have that conversation.</p>
+    <a href="mailto:asafnuriqa@gmail.com" class="contact-email-link">asafnuriqa@gmail.com</a>
+  </div>
+  <div class="contact-right reveal">
+    <a href="mailto:asafnuriqa@gmail.com" class="contact-row">
+      <div class="contact-row-left">
+        <span class="contact-row-type">Email</span>
+        <div><div class="contact-row-label">Direct</div><div class="contact-row-value">asafnuriqa@gmail.com</div></div>
+      </div>
+      <div class="contact-row-arrow">→</div>
+    </a>
+    <a href="tel:+972524200706" class="contact-row">
+      <div class="contact-row-left">
+        <span class="contact-row-type">Tel</span>
+        <div><div class="contact-row-label">Mobile</div><div class="contact-row-value">+972 52-420-0706</div></div>
+      </div>
+      <div class="contact-row-arrow">→</div>
+    </a>
+    <a href="https://www.linkedin.com/in/asaf-nuri" target="_blank" class="contact-row">
+      <div class="contact-row-left">
+        <span class="contact-row-type">LI</span>
+        <div><div class="contact-row-label">LinkedIn</div><div class="contact-row-value">linkedin.com/in/asaf-nuri</div></div>
+      </div>
+      <div class="contact-row-arrow">→</div>
+    </a>
+    <a href="https://github.com/asaf-1" target="_blank" class="contact-row">
+      <div class="contact-row-left">
+        <span class="contact-row-type">GH</span>
+        <div><div class="contact-row-label">GitHub</div><div class="contact-row-value">github.com/asaf-1</div></div>
+      </div>
+      <div class="contact-row-arrow">→</div>
+    </a>
+    <a href="https://drive.google.com/drive/u/3/folders/12PvT2vXk_xjch4lv_2h6Pzec-o6Wt9WV" target="_blank" class="contact-row">
+      <div class="contact-row-left">
+        <span class="contact-row-type">Portfolio</span>
+        <div><div class="contact-row-label">Google Drive</div><div class="contact-row-value">View full portfolio files</div></div>
+      </div>
+      <div class="contact-row-arrow">→</div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">Asaf Nuri · QA Automation Architect · Tel Aviv, Israel</div>
+  <div class="footer-right">Available for hire · 2025</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.08, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+function toggleExp(h){ h.parentElement.classList.toggle('open'); }
+
+document.querySelectorAll('#terminalBody .t-line, #terminalBody .t-out').forEach((el,i) => {
+  el.style.opacity = '0';
+  el.style.animation = `fade-in .25s ${.4 + i*.11}s ease forwards`;
+});
+</script>
+</body>
+</html>
