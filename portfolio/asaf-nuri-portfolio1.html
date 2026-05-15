@@ -47,8 +47,8 @@ nav{position:fixed;top:0;left:50%;transform:translateX(-50%);width:100%;max-widt
 .hero-left{position:relative;z-index:2}
 .hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:12px;opacity:0;animation:fade-up .6s .2s ease forwards}
 .hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--accent)}
-.hero-name{font-family:'Inter',sans-serif;font-size:clamp(36px,4.5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:10px;opacity:0;animation:fade-up .7s .35s ease forwards}
-.hero-name span{display:block;background:linear-gradient(135deg,#fff 40%,rgba(232,237,245,.55) 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-name{font-family:'Inter',sans-serif;font-size:clamp(36px,4.5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:10px;white-space:nowrap;opacity:0;animation:fade-up .7s .35s ease forwards}
+.hero-name span{display:inline;background:linear-gradient(135deg,#fff 40%,rgba(232,237,245,.55) 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero-name span.dim{background:linear-gradient(135deg,rgba(232,237,245,.7) 0%,rgba(232,237,245,.2) 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero-title{font-family:'DM Mono',monospace;font-size:16px;letter-spacing:.08em;color:rgba(232,237,245,.88);margin-bottom:24px;opacity:0;animation:fade-up .7s .45s ease forwards}
 .hero-desc{font-family:'Inter',sans-serif;font-size:17px;line-height:1.8;color:rgba(232,237,245,.76);max-width:560px;margin-bottom:48px;font-weight:400;opacity:0;animation:fade-up .7s .55s ease forwards}
@@ -389,7 +389,7 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
   <div class="hero-left">
     <div class="hero-eyebrow">QA Automation Architect · Tel Aviv, Israel</div>
     <div class="hero-name">
-      <span>Asaf</span><span class="dim">Nuri</span>
+      <span>Asaf Nuri</span>
     </div>
     <div class="hero-title">PLAYWRIGHT • GENAI + AI-AGENTIC WORKFLOWS • WEB APPLICATIONS • API TESTING • E2E • SAAS</div>
     <p class="hero-desc">QA Automation Architect focused on end-to-end quality for complex SaaS platforms, specializing in Playwright (TypeScript), API validation, performance testing, GenAI, agentic AI workflows, and QA automation orchestration for product companies and R&amp;D teams.</p>
@@ -455,10 +455,11 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
     <div class="skill-card">
       <div class="skill-index">02</div>
       <div class="skill-marker">API &amp; Performance</div>
-      <div class="skill-card-title">Contract &amp; Load Testing</div>
+      <div class="skill-card-title">API &amp; Load Testing</div>
       <div class="skill-tags">
         <span class="skill-tag">Postman</span><span class="skill-tag">REST API</span>
-        <span class="skill-tag">Swagger/OpenAPI</span><span class="skill-tag">k6</span>
+        <span class="skill-tag">GraphQL</span><span class="skill-tag">Swagger/OpenAPI</span>
+        <span class="skill-tag">k6</span>
         <span class="skill-tag">JMeter</span><span class="skill-tag">JWT / Auth</span>
       </div>
     </div>
@@ -489,9 +490,10 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
     <div class="skill-card s-data">
       <div class="skill-index">05</div>
       <div class="skill-marker">Data &amp; Cloud</div>
-      <div class="skill-card-title">Storage &amp; Infrastructure</div>
+      <div class="skill-card-title">Database &amp; Infrastructure</div>
       <div class="skill-tags">
-        <span class="skill-tag">MSSQL</span><span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">MSSQL</span><span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">MongoDB</span>
         <span class="skill-tag">AWS S3</span><span class="skill-tag">Azure Boards</span>
         <span class="skill-tag">Multi-Tenant</span><span class="skill-tag">Microservices</span>
       </div>
@@ -623,7 +625,7 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
 <!-- AGENTIC AI -->
 <div class="agents-section" id="agents">
   <div class="agents-bg"></div>
-  <div class="section-label">AI &amp; Automation Workflows</div>
+  <div class="section-label">AI &amp; Automation Workflow Approach</div>
   <h2 class="section-heading reveal">03 · Agentic QA Systems</h2>
   <p class="section-sub reveal">Designing intelligent test systems where AI agents coordinate validation across UI, API, data, and model output layers — continuously and observably.</p>
 
@@ -737,7 +739,7 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
 <section style="padding-top:0">
   <div class="section-label">CI/CD &amp; Delivery</div>
   <h2 class="section-heading reveal">05 · Delivery Infrastructure</h2>
-  <p class="section-sub reveal">Dockerized execution, Jenkins pipelines, and QA orchestration across local, multi-repo, and showcase workflows.</p>
+  <p class="section-sub reveal">Dockerized execution, Jenkins and Azure DevOps pipelines, Render deployment, and QA orchestration across local, multi-repo, and showcase workflows.</p>
   <div class="ci-grid reveal">
     <div class="ci-card">
       <div class="ci-card-num">01</div>
@@ -748,10 +750,10 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
     </div>
     <div class="ci-card">
       <div class="ci-card-num">02</div>
-      <div class="ci-marker">Jenkins · Pipeline</div>
-      <div class="ci-card-title">Jenkins Pipeline Design</div>
-      <div class="ci-card-desc">Jenkins-driven CI flows that detect project type, run the right build or test path, and keep delivery predictable across multiple repository types.</div>
-      <div class="project-tags"><span class="project-tag">Jenkins</span><span class="project-tag">CI/CD</span><span class="project-tag">Multi-Repo</span><span class="project-tag">Release QA</span></div>
+      <div class="ci-marker">Jenkins · Azure DevOps</div>
+      <div class="ci-card-title">CI Pipeline Design</div>
+      <div class="ci-card-desc">Jenkins and Azure DevOps pipeline flows that detect project type, run the right build or test path, and keep delivery predictable across multiple repository types.</div>
+      <div class="project-tags"><span class="project-tag">Jenkins</span><span class="project-tag">Azure DevOps</span><span class="project-tag">CI/CD</span><span class="project-tag">Multi-Repo</span><span class="project-tag">Release QA</span></div>
     </div>
     <div class="ci-card">
       <div class="ci-card-num">03</div>
@@ -762,10 +764,10 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
     </div>
     <div class="ci-card">
       <div class="ci-card-num">04</div>
-      <div class="ci-marker">Demo · Safety</div>
-      <div class="ci-card-title">Public-Safe Demo Delivery</div>
-      <div class="ci-card-desc">Portfolio demos structured so Docker, CI, and agentic workflow concepts can be shown publicly without exposing private enterprise code.</div>
-      <div class="project-tags"><span class="project-tag">Portfolio Delivery</span><span class="project-tag">Demo Safety</span><span class="project-tag">Documentation</span><span class="project-tag">Workflow Design</span></div>
+      <div class="ci-marker">Best Practice · Safety</div>
+      <div class="ci-card-title">Secure Public Demo Practices</div>
+      <div class="ci-card-desc">Portfolio demos structured with sanitized examples, clear documentation boundaries, and safe-disclosure practices so technical work can be shown publicly without exposing private code, secrets, or sensitive information.</div>
+      <div class="project-tags"><span class="project-tag">Safe Disclosure</span><span class="project-tag">Secrets Hygiene</span><span class="project-tag">Sanitized Demos</span><span class="project-tag">Documentation</span></div>
     </div>
     <div class="ci-card">
       <div class="ci-card-num">05</div>
@@ -773,6 +775,13 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
       <div class="ci-card-title">PR-Level Pipeline Gating</div>
       <div class="ci-card-desc">Bitbucket Pipelines integration that runs the automation suite on every pull request — gating merges behind quality checks, surfacing regressions before code lands in main, and supporting a strong shift-left workflow.</div>
       <div class="project-tags"><span class="project-tag">Bitbucket Pipelines</span><span class="project-tag">PR Gating</span><span class="project-tag">Shift-Left</span><span class="project-tag">CI/CD</span></div>
+    </div>
+    <div class="ci-card">
+      <div class="ci-card-num">06</div>
+      <div class="ci-marker">Render · CD</div>
+      <div class="ci-card-title">Render CD Deployment</div>
+      <div class="ci-card-desc">Continuous deployment setup for websites hosted on Render, keeping portfolio projects publicly available with repeatable build settings and clean release flow.</div>
+      <div class="project-tags"><span class="project-tag">Render</span><span class="project-tag">CD</span><span class="project-tag">Hosted Sites</span><span class="project-tag">Web Deployment</span></div>
     </div>
   </div>
 </section>
@@ -831,6 +840,12 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
       <div class="repo-desc">Next.js news-hub prototype built with TypeScript and CSS, structured as a small content product and set up for deployment with a Render configuration.</div>
       <div class="repo-tags"><span class="repo-tag">Next.js</span><span class="repo-tag">TypeScript</span><span class="repo-tag">CSS</span><span class="repo-tag">Render</span></div>
     </a>
+    <a href="https://github.com/asaf-1/Lmbda-Project" target="_blank" class="repo-card">
+      <div class="repo-top"><span class="repo-marker">repo · lambda</span><span class="repo-badge badge-open">Public</span></div>
+      <div class="repo-name">Lmbda-Project</div>
+      <div class="repo-desc">Serverless project focused on Lambda-style API execution, cloud function structure, and lightweight backend automation patterns.</div>
+      <div class="repo-tags"><span class="repo-tag">AWS Lambda</span><span class="repo-tag">Serverless</span><span class="repo-tag">API</span><span class="repo-tag">Cloud</span></div>
+    </a>
   </div>
 </section>
 
@@ -874,7 +889,7 @@ footer{padding:22px 48px;border-top:1px solid var(--border);display:flex;align-i
     <a href="https://drive.google.com/drive/u/3/folders/12PvT2vXk_xjch4lv_2h6Pzec-o6Wt9WV" target="_blank" class="contact-row">
       <div class="contact-row-left">
         <span class="contact-row-type">Portfolio</span>
-        <div><div class="contact-row-label">Google Drive</div><div class="contact-row-value">View full portfolio files</div></div>
+        <div><div class="contact-row-label">Google Drive · PDF / DOC</div><div class="contact-row-value">View portfolio files in PDF and DOC formats</div></div>
       </div>
       <div class="contact-row-arrow">→</div>
     </a>
