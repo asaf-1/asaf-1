@@ -1,2 +1,8 @@
 # Local backup copy, not part of the published site
 back-up-asaf-nuri-portfolio.html
+
+# Local preview file (used for reviewing changes before promoting to live)
+portfolio/asaf-nuri-portfolio-preview.html
+
+# Local timestamped backups of the live portfolio
+portfolio-backups/
