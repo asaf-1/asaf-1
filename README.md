@@ -9,7 +9,7 @@ Tel Aviv, Israel | +972-52-4200706 | asafnuriqa@gmail.com
 
 ## Highlights
 - Multi-tenant Playwright automation for SaaS, commerce, and operational platforms
-- Business-flow coverage across UI, API, backend, data, permissions, tenant switching, packages, and licensing
+- Business-flow coverage across UI/UX, API, backend, data, permissions, tenant switching, packages, and licensing
 - REST, GraphQL, Swagger / OpenAPI, Postman, curl, Auth / JWT, and role-based validation scenarios
 - Performance and load testing with k6, JMeter, and Grafana-oriented reporting
 - Dockerized automation runners and CI/CD workflows across Jenkins, GitHub Actions, Bitbucket Pipelines, Azure DevOps, and Render CD
