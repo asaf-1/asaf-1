@@ -1,9 +1,9 @@
 # About Me
-QA Automation Architect with 6 years of experience across manual testing, bug tracking, Playwright-based automation, API validation, performance testing, GenAI, agentic AI workflows, and QA automation orchestration for complex SaaS, E-Commerce, warehouse(WMS), and AI-based systems.
+ Automation infrastructure Architect and SDET with 7 years of experience across manual testing, bug tracking, Playwright-based automation, API validation, performance testing, GenAI, agentic AI workflows, and automation orchestration for complex SaaS, E-Commerce, warehouse(WMS), and AI-based systems.
 
-I build end-to-end automation infrastructure from scratch, covering Playwright TypeScript frameworks, regression architecture, multi-tenant validation, API and data checks, Dockerized execution, PR-level CI gates, and release-quality workflows. I work closely with R&D teams to improve stability, scalability, observability, and delivery confidence across frontend, backend, API, and database layers.
+I build end-to-end automation infrastructure from scratch, covering Playwright TypeScript frameworks, regression architecture, multi-tenancy validation, API and data checks, Dockerized execution, PR-level CI gates, and release-quality workflows. I work closely with R&D teams to improve stability, scalability, observability, and delivery confidence across frontend, backend, API, and database layers.
 
-**Playwright Automation | E2E | TypeScript | REST | GraphQL | Swagger / OpenAPI | Postman | k6 | JMeter | GenAI | Agentic QA | QA Orchestration | SaaS | CI/CD | Jenkins | GitHub Actions | Bitbucket Pipelines | Azure DevOps | Docker | Render CD | GitHub CLI**
+**Playwright Automation | E2E | TypeScript | REST | GraphQL | Swagger / OpenAPI | Postman | k6 | JMeter | GenAI | Agentic AI | infrastructure Orchestration | SaaS | CI/CD | Jenkins | GitHub Actions | Bitbucket Pipelines | Azure DevOps | Docker | Render CD | GitHub CLI**
 
 Tel Aviv, Israel | +972-52-4200706 | asafnuriqa@gmail.com
 
