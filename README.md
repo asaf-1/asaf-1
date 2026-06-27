@@ -1,5 +1,5 @@
 # About Me
- Automation infrastructure Architect and SDET with 7 years of experience across manual testing, bug tracking, Playwright-based automation with TypeScript, API validation, performance testing, GenAI, agentic AI workflows, and automation orchestration for complex SaaS, E-Commerce, warehouse(WMS), and AI-based systems.
+ Automation infrastructure Architect and SDET with 7 years of experience across manual testing, bug tracking, Playwright-based automation with TypeScript & Python, API validation, performance testing, GenAI, agentic AI workflows, and automation orchestration for complex SaaS, E-Commerce, warehouse(WMS), and AI-based systems.
 
 I build end-to-end automation infrastructure from scratch, covering Playwright TypeScript frameworks, regression architecture, multi-tenancy validation, API and data checks, Dockerized execution, PR-level CI gates, and release-quality workflows. I work closely with R&D teams to improve stability, scalability, observability, and delivery confidence across frontend, backend, API, and database layers.
 
