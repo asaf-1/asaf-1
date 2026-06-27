@@ -3,7 +3,7 @@
 
 I build end-to-end automation infrastructure from scratch, covering Playwright TypeScript frameworks, regression architecture, multi-tenancy validation, API and data checks, Dockerized execution, PR-level CI gates, and release-quality workflows. I work closely with R&D teams to improve stability, scalability, observability, and delivery confidence across frontend, backend, API, and database layers.
 
-**Playwright Automation | E2E | TypeScript | REST | GraphQL | Swagger / OpenAPI | Postman | k6 | JMeter | GenAI | Agentic AI | infrastructure Orchestration | SaaS | CI/CD | Jenkins | GitHub Actions | Bitbucket Pipelines | Azure DevOps | Docker | Render CD | GitHub CLI**
+**Playwright Automation | E2E | TypeScript | REST | GraphQL | Swagger / OpenAPI | Postman | k6 & Grafana Load and stress | JMeter | GenAI | Agentic AI | infrastructure Orchestration | SaaS | CI/CD | Jenkins | GitHub Actions | Bitbucket Pipelines | Azure DevOps | Docker | Render CD | GitHub CLI**
 
 Tel Aviv, Israel | +972-52-4200706 | asafnuriqa@gmail.com
 
