@@ -6,7 +6,6 @@ With 6 years of experience across SaaS, Multi-Tenant, E-Commerce, and WMS platfo
 
 My role sits at the intersection of Senior SDET, Test Infrastructure, DevOps and Quality Engineering. I build scalable systems that reduce manual regression, identify integration failures earlier, improve release confidence, and give Engineering and Product teams clear information they can act on.
 
-# Related fields
 Playwright + TypeScript Automation | CI/CD Integration | Docker | Render CD | E2E | infrastructure Orchestration | SaaS | REST | k6 & Grafana Load and stress | GenAI | Agentic AI | Jenkins | GitHub Actions | Bitbucket Pipelines 
 
 Tel Aviv, Israel | +972-52-4200706 | asafnuriqa@gmail.com
