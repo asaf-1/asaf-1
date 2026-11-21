@@ -10,6 +10,7 @@
   <a href="https://www.linkedin.com/in/asaf-nuri/"><img src="https://img.shields.io/badge/LinkedIn-%230A66C2.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
   <a href="mailto:asafnuriqa@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
   <a href="https://asaf-1.github.io/asaf-1/portfolio/asaf-nuri-portfolio1.html"><img src="https://img.shields.io/badge/Portfolio-00e5b0?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Portfolio" /></a>
+  <a href="https://github.com/asaf-1/asaf-1/blob/main/STATS.md"><img src="https://img.shields.io/badge/GitHub_Stats-8957E5?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Stats" /></a>
 </p>
 
 <p align="center">📍 Tel Aviv, Israel &nbsp;·&nbsp; 📞 +972-52-4200706 &nbsp;·&nbsp; ✉️ asafnuriqa@gmail.com</p>
