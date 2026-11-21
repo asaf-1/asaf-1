@@ -45,7 +45,11 @@ My role sits at the intersection of Senior SDET, Test Infrastructure, DevOps and
 
 ### [Agents Playground](https://github.com/asaf-1/Agents-Playground)
 
-A QA automation playground: a practice bank site with 44 planted bugs, a large Playwright suite with AI agents that heal and diagnose tests, a remote test runner, k6 load tests, and CI with canaries on Kubernetes and Terraform.
+An end-to-end QA automation platform built around a practice bank with 44 planted bugs.
+
+- 670+ Playwright tests, with AI agents that heal and diagnose failures
+- A remote test runner and k6 load tests
+- CI/CD with pre-merge gates, post-merge canaries, and a Kubernetes canary on a cluster built with Terraform
 
 <p>
   <a href="https://agents-playground-app.onrender.com/app"><img src="https://img.shields.io/badge/Live_demo-46E3B7?style=for-the-badge&logo=render&logoColor=black" alt="Live demo" /></a>
